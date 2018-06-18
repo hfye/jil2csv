@@ -128,7 +128,11 @@ public class AutosysJil2Csv {
 					jobParameterMap.putAll(jobConfigurationMap);
 				} else {
 					String[] values = line.split(": ");
-					jobParameterMap.put(values[0], escapeCsv(values[1]));
+					String value = "";
+					if (values.length > 1) {
+						value = values[1];
+					}
+					jobParameterMap.put(values[0], escapeCsv(value));
 				}
 			}
 			
