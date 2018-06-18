@@ -14,7 +14,7 @@ import java.nio.file.Path;
 public class AutosysJil2Csv {
 	public static void main(String[] args) throws IOException {
 		if (args.length < 2) {
-			System.out.println("usage: JIL2CSV jil-file csv-file");
+			System.out.println("usage: AutosysJil2Csv jil-file csv-file");
 			System.exit(0);
 		}
 		
@@ -34,7 +34,7 @@ public class AutosysJil2Csv {
 			Files.delete(csvFilepath);
 		}
 		
-		JIL2CSV.convert(jilFilename, csvFilename);
+		AutosysJil2Csv.convert(jilFilename, csvFilename);
 	}
 	
 	public static void convert(String jilFile, String csvFile) {
@@ -128,7 +128,11 @@ public class AutosysJil2Csv {
 					jobParameterMap.putAll(jobConfigurationMap);
 				} else {
 					String[] values = line.split(": ");
-					jobParameterMap.put(values[0], escapeCsv(values[1]));
+					String value = "";
+					if (values.length > 1) {
+						value = values[1];
+					}
+					jobParameterMap.put(values[0], escapeCsv(value));
 				}
 			}
 			
